@@ -55,7 +55,7 @@ describe("Given I am connected as an employee", () => {
 					type: 'Employee',
 				})
 			);
-			// configuration de la page new bill
+			// Configuration of the Newbill's page
 			const html = NewBillUI();
 			document.body.innerHTML = html;
 			const onNavigate = (pathname) => {
