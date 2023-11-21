@@ -5,7 +5,8 @@ import LoadingPage from "./LoadingPage.js"
 import Actions from './Actions.js'
 
 const row = (bill) => {
-  return (`
+	if (bill.type !== null) { // Si le type de la facture a été remplis,  celle-ci sera afficher
+		return `
     <tr>
       <td>${bill.type}</td>
       <td>${bill.name}</td>
@@ -16,11 +17,20 @@ const row = (bill) => {
         ${Actions(bill.fileUrl)}
       </td>
     </tr>
-    `)
+    `;
+	}else{
+    return ''
   }
+}
+
 
 const rows = (data) => {
-  return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
+  console.log(data)
+  let trier
+  if(data){
+     trier = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
+  return data && data.length ? trier.map((bill) => row(bill)).join('') : '';
 }
 
 export default ({ data: bills, loading, error }) => {
